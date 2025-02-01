@@ -1,0 +1,24 @@
+{
+  "name": "anvil-aleph",
+  "version": "1.0.0",
+  "description": "Module to launch local blockchain and first setup",
+  "main": "setup.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cryptoXR-hack-2025/foundry-alephium.git"
+  },
+  "dependencies": {
+    "@alephium/web3": "1.11.3",
+    "@alephium/web3-wallet": "1.11.3"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cryptoXR-hack-2025/foundry-alephium/issues"
+  },
+  "homepage": "https://github.com/cryptoXR-hack-2025/foundry-alephium#readme"
+}
