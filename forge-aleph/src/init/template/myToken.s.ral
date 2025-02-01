@@ -1,5 +1,3 @@
-import "../src/TokenFaucet.ral"
-
 TxScript Deploy(
 ) {
     // Token contract parameters
