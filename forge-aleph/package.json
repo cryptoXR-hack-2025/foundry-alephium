@@ -1,0 +1,18 @@
+{
+  "name": "forge-aleph",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "forge-aleph": "src/cli.js"
+  },
+  "scripts": {
+    "init": "node src/init/index.js $1",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "script": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "description": ""
+}
