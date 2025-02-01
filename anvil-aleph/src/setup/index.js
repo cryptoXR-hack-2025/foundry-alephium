@@ -51,6 +51,7 @@ const feed_accounts = async (accounts, master_data, builder) => {
             process.exit(1);
         }        
     }
+    return amount;
 }
 
 
@@ -74,6 +75,16 @@ export default async function init_context() {
 
     const nbAccounts = 10;
     const accounts = await init_accounts(nbAccounts, nodeProvider, explorerProvider)
-    await feed_accounts(accounts, master_data, builder)
-    return accounts
+    const balance = await feed_accounts(accounts, master_data, builder)
+
+    let formatted_output = []
+    for (const account of accounts) {
+        formatted_output.push({
+            address: account.address,
+            pv_key: PrivateKeyWallet.FromMnemonic(account.mnemonic),
+            balance: balance
+        })
+    }
+
+    return formatted_output
 }
