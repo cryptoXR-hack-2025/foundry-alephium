@@ -1,20 +1,15 @@
-TxScript Deploy() {
+TxScript Deploy(fooBytecode:ByteVec,caller:Address) {
     // Token contract parameters
     let symbol = b`RALPH`
     let name = b`Ralph token`
     let decimals = 10
     let initialSupply = 1e18
 
+    // Deploy contracts
+    let (encodedImmFields, encodedMutFields) = TokenFaucet.encodeFields!(symbol,name,  decimals, initialSupply, initialSupply)
+    let deployed_id = createContract!{caller -> ALPH:1 alph}(fooBytecode, encodedImmFields, encodedMutFields)
 
-    // Deploy the token faucet contract with the created token
-    let faucet = TokenFaucet(
-        symbol,      // Pass the token symbol
-        name,        // Pass the token name
-        decimals,    // Pass the decimals
-        initialSupply,      // Pass the total supply
-        initialSupply       // Initially set the balance to the total supply
-    )
-
-    emit Debug(`Token Faucet deployed at ${faucet.address}`)
+    // Debug data about deployed contracts
+    emit Debug(`Token Faucet deployed at ${deployed_id} id`)
     emit Debug(`Initial supply: ${initialSupply}`)
 }
