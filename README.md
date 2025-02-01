@@ -12,10 +12,12 @@ anvil-aleph is used to launch a local blockchain and generate accounts.
 
 #### Install anvil-aleph CLI:
 cd anvil-aleph
-npm link
+
+then:
+`npm link`
 
 #### Run anvil-aleph:
-anvil-aleph <number_of_accounts>
+`anvil-aleph <number_of_accounts>`
 
 This command will launch your local blockchain, create a bunch of accounts, and fund them with ALPH to be ready for use.
 
