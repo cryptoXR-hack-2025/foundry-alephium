@@ -12,7 +12,10 @@
   },
   "dependencies": {
     "@alephium/web3": "1.11.3",
-    "@alephium/web3-wallet": "1.11.3"
+    "@alephium/web3-wallet": "1.11.3",
+    "dotenv": "16.4.7",
+    "chalk": "5.4.1",
+    "commander": "13.1.0"
   },
   "type": "module",
   "author": "",
