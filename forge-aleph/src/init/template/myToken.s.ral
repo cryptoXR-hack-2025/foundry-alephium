@@ -1,0 +1,40 @@
+import "../src/myToken"
+
+TxScript Deploy(
+) {
+    // Token contract parameters
+    const symbol = b'RALPH'
+    const name = b'Ralph token'
+    const decimals = 10
+    const initialSupply = 1e18
+
+    // Create the initial token with the specified supply
+    // let (tokenId, supply) = IFungibleToken.createToken!(
+    //     symbol,
+    //     name,
+    //     decimals,
+    //     initialSupply,
+    //     // The last parameter is `true` to make the token destroyable
+    //     true
+    // )
+
+    // Deploy the token faucet contract with the created token
+    let faucet = TokenFaucet(
+        symbol,      // Pass the token symbol
+        name,        // Pass the token name
+        decimals,    // Pass the decimals
+        initialSupply,      // Pass the total supply
+        initialSupply       // Initially set the balance to the total supply
+    )
+
+    // Issue the created token to the faucet contract
+    // IFungibleToken.transfer!(
+    //     tokenId,
+    //     selfAddress!(), // from the deployer
+    //     faucet.address, // to the faucet contract
+    //     supply         // transfer the entire supply
+    // )
+
+    emit Debug(`Token Faucet deployed at ${faucet.address}`)
+    emit Debug(`Initial supply: ${initialSupply}`)
+}

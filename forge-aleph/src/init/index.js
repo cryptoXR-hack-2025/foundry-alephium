@@ -4,14 +4,17 @@ import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
 
+
 const directory_structure = {
     'script': ['myToken.s.ral'],
-    'src': ['myToken.ral'],
+    'src': ['myToken.ral', 'withdraw.ral'],
     'test': ['myToken.t.ral'],
     '.': ['Readme.md', '.gitignore', '.foundry.toml']
 };
 
 const currentWorkingDirectory = process.cwd();
+
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 
 function initialCommit(repoPath) {
@@ -25,6 +28,17 @@ function initialCommit(repoPath) {
     console.log('Initial commit created: "initial commit on foundry alephium"');
 }
 
+function getFileContent(fileName) {
+    const filePath = path.join(__dirname,'template', fileName);
+    if (fs.existsSync(filePath)) {
+        return fs.readFileSync(filePath, 'utf-8');
+    } else {
+        console.error(`Error: ${fileName} does not exist in the current directory.`);
+        process.exit(1);
+    }
+}
+
+
 function createStructure(repoPath) {
     Object.entries(directory_structure).forEach(([dir, files]) => {
         const dirPath = path.join(repoPath, dir);
@@ -35,7 +49,7 @@ function createStructure(repoPath) {
         files.forEach(file => {
             const filePath = path.join(dirPath, file);
             if (!fs.existsSync(filePath)) {
-                fs.writeFileSync(filePath, '');
+                fs.writeFileSync(filePath, getFileContent(file));
                 console.log(`Created file: ${filePath}`);
             }
         });
@@ -44,7 +58,7 @@ function createStructure(repoPath) {
 
 function createRepo(repoName) {
     const repoPath = path.join(currentWorkingDirectory, repoName);
-
+    
     fs.mkdirSync(repoPath, { recursive: true });
     console.log(`Created repository directory: ${repoPath}`);
     return repoPath;
@@ -57,5 +71,3 @@ export default function init(repoName) {
     initialCommit(repoPath);
 }
 
-
-// init(process.argv[2])
