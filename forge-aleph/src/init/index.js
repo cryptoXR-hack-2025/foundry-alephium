@@ -6,9 +6,9 @@ import { execSync } from 'child_process';
 
 
 const directory_structure = {
-    'script': ['myToken.s.ral'],
-    'src': ['myToken.ral', 'withdraw.ral'],
-    'test': ['myToken.t.ral'],
+    'src/script': ['myToken.s.ral'],
+    'src/contracts': ['myToken.ral', 'withdraw.ral'],
+    'src/test': ['myToken.t.ral'],
     '.': ['Readme.md', '.gitignore', '.foundry.toml']
 };
 

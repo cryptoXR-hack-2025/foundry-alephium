@@ -14,9 +14,8 @@ export default async function script(scriptPath, rpcUrl, privateKey) {
     console.log(`Deploy from wallet address: ${wallet.address}`)
 
     try {
-
-        const project = await CLI.Project.compile(undefined, path.resolve(scriptPath, '..'), path.resolve(scriptPath, '..'), path.join('../out', scriptPath))
-
+        const project = await CLI.Project.compile(undefined,undefined,path.resolve(scriptPath, '..','..'), path.resolve(scriptPath, '..','..','..','out'))
+        
         // Get the TokenFaucet contract and Deploy script
         // const tokenFaucet = project .artifacts.contracts['TokenFaucet']
         // const deployScript = project.artifacts.scripts['Deploy']
