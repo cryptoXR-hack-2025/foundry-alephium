@@ -8,8 +8,7 @@ export default async function test(scriptPath, rpcUrl, privateKey) {
     // Configure the network provider
     const nodeProvider = new NodeProvider(rpcUrl)
     web3.setCurrentNodeProvider(nodeProvider)
-    // const builder = TransactionBuilder.from(nodeUrl)
-    // builder.buildExecuteScriptTx()
+    
     const wallet = new PrivateKeyWallet({ privateKey: privateKey })
     console.log(`Deploy and test from wallet address: ${wallet.address}`)
 
@@ -22,20 +21,6 @@ export default async function test(scriptPath, rpcUrl, privateKey) {
     }
 
     try {
-        // Get the TokenFaucet contract and Deploy script
-        // import {Deploy} from path.resolve(scriptPath, '..','..','..','out','scripts.ts')
-        const bytecode = Deploy.script.buildByteCodeToDeploy({ amount: ONE_ALPH })
-
-
-
-        // Execute the deploy script for test contract
-        console.log('Deploying test contract...')
-        // deploy here
-
-        console.log('Waiting for transaction confirmation...')
-        const txId = // tx id
-        // it will query the tx status every 4 seconds and wait for 2 block confirmations
-        await waitForTxConfirmation(txId, 2, 4000)
         console.log("Test contract deployed succesfully")
     } catch (error) {
         console.error('Error during deployment:', error)
@@ -48,4 +33,3 @@ export default async function test(scriptPath, rpcUrl, privateKey) {
     console.log('All tests run successfully')
 }
 
-// script("toto/script/myToken.s.ral", "http://localhost:22973", "684f1d5de35ef1bdec1ee5087032e139f60f947258ab747d1e0c337f217d2e81")

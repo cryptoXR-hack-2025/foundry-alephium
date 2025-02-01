@@ -1,30 +1,30 @@
 TxScript DeployTest(fooBytecode:ByteVec,caller:Address) {
-  // Token contract parameters
-  let symbol = b`RALPH`
-  let name = b`Ralph token`
-  let decimals = 10
-  let initialSupply = 1e18
-
-  // Deploy contracts
-  let (encodedImmFields, encodedMutFields) = TokenFaucet.encodeFields!(symbol,name,  decimals, initialSupply, initialSupply)
-  let deployed_id = createContract!{caller -> ALPH:1 alph}(fooBytecode, encodedImmFields, encodedMutFields)
-
-  // Debug data about deployed contracts
-  emit Debug(`Token Faucet deployed at ${deployed_id} id`)
-  emit Debug(`Initial supply: ${initialSupply}`)
-
-  pub fn testSupply(contract_id:ByteVec) -> () {
-    let supply = TokenFaucet(contract_id).getTotalSupply()
-    assert!(supply == 1e18, 1)
+    // Token contract parameters
+    let symbol = b`RALPH`
+    let name = b`Ralph token`
+    let decimals = 10
+    let initialSupply = 1e18
+  
+    // Deploy contracts
+    let (encodedImmFields, encodedMutFields) = TokenFaucet.encodeFields!(symbol,name,  decimals, initialSupply, initialSupply)
+    let deployed_id = createContract!{caller -> ALPH:1 alph}(fooBytecode, encodedImmFields, encodedMutFields)
+  
+    // Debug data about deployed contracts
+    emit Debug(`Token Faucet deployed at ${deployed_id} id`)
+    emit Debug(`Initial supply: ${initialSupply}`)
+  
+    pub fn testSupply(contract_id:ByteVec) -> () {
+      let supply = TokenFaucet(contract_id).getTotalSupply()
+      assert!(supply == 1e18, 1)
+    }
+  
+    pub fn testName(contract_id:ByteVec) -> () {
+      let name = TokenFaucet(contract_id).getName()
+      assert!(name == b`Ralph token`, 1)
+    }
+  
+    pub fn testSymbol(contract_id:ByteVec) -> () {
+      let symbol = TokenFaucet(contract_id).getSymbol()
+      assert!(symbol == b`RALPH`, 1)
+    }
   }
-
-  pub fn testName(contract_id:ByteVec) -> () {
-    let name = TokenFaucet(contract_id).getName()
-    assert!(name == b`Ralph token`, 1)
-  }
-
-  pub fn testSymbol(contract_id:ByteVec) -> () {
-    let symbol = TokenFaucet(contract_id).getSymbol()
-    assert!(supply == b'RALPH', 1)
-  }
-}
