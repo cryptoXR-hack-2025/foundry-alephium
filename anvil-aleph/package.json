@@ -2,7 +2,10 @@
   "name": "anvil-aleph",
   "version": "1.0.0",
   "description": "Module to launch local blockchain and first setup",
-  "main": "setup.js",
+  "main": "index.js",
+  "bin": {
+    "anvil-aleph": "src/cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

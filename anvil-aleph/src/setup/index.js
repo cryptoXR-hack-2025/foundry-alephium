@@ -1,5 +1,5 @@
 import { TransactionBuilder } from '@alephium/web3'
-import { HDWallet } from '@alephium/web3-wallet'
+import { HDWallet, PrivateKeyWallet } from '@alephium/web3-wallet'
 import { NodeProvider, ExplorerProvider } from '@alephium/web3'
 import dotenv from 'dotenv';
 
@@ -42,18 +42,19 @@ const feed_accounts = async (accounts, master_data, builder) => {
                 senderPublicKey
             )
             const result = await master_data.master_signer.signAndSubmitUnsignedTx({
-                signerAddress: account_master.address,
+                signerAddress: master_data.master_address,
                 unsignedTx: buildTxResult.unsignedTx
             })
         } catch (error) {
             console.error('Not enough fund to feed accounts. Please restart anvil.');
+            console.log(error)
             process.exit(1);
         }        
     }
 }
 
 
-const init_context = async () => {
+export default async function init_context() {
     const nodeUrl = process.env.NODE_URL
     const explorerUrl = process.env.EXPLORER_URL;
     const nodeProvider = new NodeProvider(nodeUrl);
@@ -70,11 +71,9 @@ const init_context = async () => {
         master_pubkey: account_master.publicKey,
         master_balance: 1000000000000000000000000n
     }
-    
+
     const nbAccounts = 10;
-
-    const accounts = await init_accounts(10, nodeProvider, explorerProvider)
+    const accounts = await init_accounts(nbAccounts, nodeProvider, explorerProvider)
     await feed_accounts(accounts, master_data, builder)
+    return accounts
 }
-
-export default function init_context();
