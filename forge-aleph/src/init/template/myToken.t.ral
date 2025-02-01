@@ -17,4 +17,14 @@ TxScript DeployTest(fooBytecode:ByteVec,caller:Address) {
     let supply = TokenFaucet(contract_id).getTotalSupply()
     assert!(supply == 1e18, 1)
   }
+
+  pub fn testName(contract_id:ByteVec) -> () {
+    let name = TokenFaucet(contract_id).getName()
+    assert!(name == b`Ralph token`, 1)
+  }
+
+  pub fn testSymbol(contract_id:ByteVec) -> () {
+    let symbol = TokenFaucet(contract_id).getSymbol()
+    assert!(supply == b'RALPH', 1)
+  }
 }
