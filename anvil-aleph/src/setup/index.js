@@ -1,9 +1,6 @@
 import { TransactionBuilder } from '@alephium/web3'
 import { HDWallet, PrivateKeyWallet } from '@alephium/web3-wallet'
 import { NodeProvider, ExplorerProvider } from '@alephium/web3'
-import dotenv from 'dotenv';
-
-dotenv.config()
 
 const init_accounts = async (nbAccounts, nodeProvider, explorerProvider) => {
     let accounts = []
@@ -56,13 +53,13 @@ const feed_accounts = async (accounts, master_data, builder) => {
 
 
 export default async function init_context() {
-    const nodeUrl = process.env.NODE_URL
-    const explorerUrl = process.env.EXPLORER_URL;
+    const nodeUrl = 'http://127.0.0.1:22973';
+    const explorerUrl = 'http://127.0.0.1:9090';
     const nodeProvider = new NodeProvider(nodeUrl);
     const explorerProvider = new ExplorerProvider(explorerUrl);
     const builder = TransactionBuilder.from(nodeUrl);
     
-    const mnemonic_master = process.env.MNEMONIC_MASTER;
+    const mnemonic_master = 'vault alarm sad mass witness property virus style good flower rice alpha viable evidence run glare pretty scout evil judge enroll refuse another lava';
     const master_signer = new HDWallet({mnemonic:mnemonic_master, nodeProvider:nodeProvider, explorerProvider:explorerProvider});
     const account_master = await master_signer.deriveAndAddNewAccount(0);
     const master_data = {
