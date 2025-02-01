@@ -1,21 +1,4 @@
-Contract TestContract(
-  symbol: ByteVec,
-  name: ByteVec,
-  decimals: U256,
-  initialSupply: U256,
-) {
-
-  let (encodedImmFields, encodedMutFields) = TokenFaucet.encodeFields!(symbol,name,  decimals, initialSupply, initialSupply)
-  let deployed_id = createContract!{caller -> ALPH:1 alph}(fooBytecode, encodedImmFields, encodedMutFields)
-
-  // A public function that returns the current balance of the contract.
-  pub fn testSupply() -> Bool {
-    let supply = TokenFaucet(deployed_id).getTotalSupply()
-    assert!(supply == 1e18)
-  }
-}
-
-TxScript Deploy(testBytecode:ByteVec,caller:Address) {
+TxScript DeployTest(fooBytecode:ByteVec,caller:Address) {
   // Token contract parameters
   let symbol = b`RALPH`
   let name = b`Ralph token`
@@ -23,10 +6,15 @@ TxScript Deploy(testBytecode:ByteVec,caller:Address) {
   let initialSupply = 1e18
 
   // Deploy contracts
-  let (encodedImmFields, encodedMutFields) = TestContract.encodeFields!(symbol,name,  decimals, initialSupply)
-  let test_id = createContract!{caller -> ALPH:1 alph}(testBytecode, encodedImmFields, encodedMutFields)
+  let (encodedImmFields, encodedMutFields) = TokenFaucet.encodeFields!(symbol,name,  decimals, initialSupply, initialSupply)
+  let deployed_id = createContract!{caller -> ALPH:1 alph}(fooBytecode, encodedImmFields, encodedMutFields)
 
   // Debug data about deployed contracts
-  emit Debug(`TestContract deployed at ${test_id} id`)
-  emit Debug(`Function available is testSupply`)
+  emit Debug(`Token Faucet deployed at ${deployed_id} id`)
+  emit Debug(`Initial supply: ${initialSupply}`)
+
+  pub fn testSupply(contract_id:ByteVec) -> () {
+    let supply = TokenFaucet(contract_id).getTotalSupply()
+    assert!(supply == 1e18, 1)
+  }
 }
