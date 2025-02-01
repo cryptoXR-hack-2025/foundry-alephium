@@ -14,5 +14,9 @@
   "author": "",
   "license": "ISC",
   "type": "module",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@alephium/web3": "^1.11.3",
+    "@alephium/web3-wallet": "^1.11.3"
+  }
 }
