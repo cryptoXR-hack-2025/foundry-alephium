@@ -2,6 +2,7 @@
 
 import init from "./init/index.js";
 import script from "./script/index.js";
+import test from "./test/index.js";
 
 
 const args = process.argv.slice(2);
@@ -41,4 +42,20 @@ if (command == "script") {
 }
 
 if (command == "test") {
+    const testContractPath = args[1];
+    const rpcUrl = args[2];
+    const privateKey = args[3];
+    if (!testContractPath) {
+        console.error('Please provide a path for test contract: forge-aleph test <contract>');
+        process.exit(1);
+    }
+    if (!rpcUrl) {
+        console.error('Please provide an rpc url');
+        process.exit(1);
+    }
+    if (!privateKey) {
+        console.error('Please provide a private key');
+        process.exit(1);
+    }
+    await test(testContractPath,rpcUrl,privateKey)
 }
