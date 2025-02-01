@@ -1,4 +1,4 @@
-import "../src/myToken"
+import "../src/TokenFaucet.ral"
 
 TxScript Deploy(
 ) {

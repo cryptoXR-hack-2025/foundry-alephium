@@ -1,5 +1,5 @@
 import { web3, NodeProvider, waitForTxConfirmation, TransactionBuilder } from '@alephium/web3';
-import { PrivateKeyWallet, generateMnemonic } from '@alephium/web3-wallet';
+import { PrivateKeyWallet } from '@alephium/web3-wallet';
 import CLI from '@alephium/cli'
 import path from 'path';
 
@@ -10,12 +10,12 @@ export default async function script(scriptPath, rpcUrl, privateKey) {
     web3.setCurrentNodeProvider(nodeProvider)
     // const builder = TransactionBuilder.from(nodeUrl)
     // builder.buildExecuteScriptTx()
-    const wallet = new PrivateKeyWallet({privateKey: privateKey})
+    const wallet = new PrivateKeyWallet({ privateKey: privateKey })
     console.log(`Deploy from wallet address: ${wallet.address}`)
 
     try {
-        
-        const project = await CLI.Project.compile(undefined, path.resolve(scriptPath, '..'), path.join('../out', scriptPath)    )
+
+        const project = await CLI.Project.compile(undefined, path.resolve(scriptPath, '..'), path.join(scriptPath, '..'), path.join('../out', scriptPath))
 
         // Get the TokenFaucet contract and Deploy script
         // const tokenFaucet = project .artifacts.contracts['TokenFaucet']
@@ -40,4 +40,4 @@ export default async function script(scriptPath, rpcUrl, privateKey) {
     }
 }
 
-script("toto/script/myToken.s.ral", "localhost:9000", "684f1d5de35ef1bdec1ee5087032e139f60f947258ab747d1e0c337f217d2e81")
+// script("toto/script/myToken.s.ral", "http://localhost:22973", "684f1d5de35ef1bdec1ee5087032e139f60f947258ab747d1e0c337f217d2e81")
