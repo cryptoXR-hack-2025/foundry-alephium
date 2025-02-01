@@ -16,6 +16,7 @@
   "type": "module",
   "description": "",
   "dependencies": {
+    "@alephium/cli": "^1.11.3",
     "@alephium/web3": "^1.11.3",
     "@alephium/web3-wallet": "^1.11.3"
   }

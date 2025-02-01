@@ -37,7 +37,7 @@ if (command == "script") {
         console.error('Please provide a private key');
         process.exit(1);
     }
-    script(scriptPath,rpcUrl,privateKey)
+    await script(scriptPath,rpcUrl,privateKey)
 }
 
 if (command == "test") {
