@@ -15,23 +15,20 @@ export default async function script(scriptPath, rpcUrl, privateKey) {
 
     try {
         const project = await CLI.Project.compile(undefined,undefined,path.resolve(scriptPath, '..','..'), path.resolve(scriptPath, '..','..','..','out'))
-        
+        CLI.codegen(project)
         // Get the TokenFaucet contract and Deploy script
-        // const tokenFaucet = project .artifacts.contracts['TokenFaucet']
-        // const deployScript = project.artifacts.scripts['Deploy']
+        const bytecode = .script.buildByteCodeToDeploy({ amount: ONE_ALPH })
 
-        // if (!tokenFaucet || !deployScript) {
-        //     throw new Error('Contract or deploy script not found')
-        // }
 
-        // // Execute the deploy script
-        // console.log('Executing deploy script...')
-        // // deploy here
 
-        // console.log('Waiting for transaction confirmation...')
-        // const txId = // tx id
-        // // it will query the tx status every 4 seconds and wait for 2 block confirmations
-        // await waitForTxConfirmation(txId, 2, 4000)
+        // Execute the deploy script
+        console.log('Executing deploy script...')
+        // deploy here
+
+        console.log('Waiting for transaction confirmation...')
+        const txId = // tx id
+        // it will query the tx status every 4 seconds and wait for 2 block confirmations
+        await waitForTxConfirmation(txId, 2, 4000)
 
     } catch (error) {
         console.error('Error during compilation:', error)
