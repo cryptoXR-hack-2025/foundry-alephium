@@ -44,12 +44,9 @@ forge-aleph test <test_contract> <rpc_url> <private_key>
 Initialize a new project using:
 forge-aleph init my-new-project
 
-Deploy a contract:
+Deploy a contract: forge-aleph script  src/script/myToken.s.ral http://localhost:22973 684f1d5de35ef1bdec1ee5087032e139f60f947258ab747d1e0c337f217d2e81
 
-forge-aleph script MyDeploymentContract http://localhost:22973 684f1d5de35ef1...
-
-Run tests:
-forge-aleph test MyTestContract http://localhost:22973 684f1d5de35ef1...
+Run tests: forge-aleph test MyTestContract http://localhost:22973 684f1d5de35ef1...
 
 License
 This project is licensed under the MIT License.
